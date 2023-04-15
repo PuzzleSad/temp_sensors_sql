@@ -3,6 +3,8 @@
 #include "src/sql/sql.h"
 #include "src/log/log.h"
 
+#include "src/sensors/ds18b20.h"
+
 #include <unistd.h>
 
 
@@ -19,7 +21,11 @@ int main(){
         database_open( &db, "test.db");
         print_tables(db);
 
-        sleep(6);
+        sleep(0);
+        
+        ds18b20_t* d;
+        int ds_count;
+        ds_count = find_ds18b20_sensors(&d);
 
 
 

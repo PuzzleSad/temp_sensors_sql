@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <sqlite3.h>
-#include "../../main.h"
 
 #define printerr_loc()\
 do{\

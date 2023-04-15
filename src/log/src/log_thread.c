@@ -28,7 +28,7 @@ static void* log_thread( void* args ){
                 pthread_mutex_lock( &lp->mtx);
 
                 // if( lp->thread_sleep ){
-                        setup_timed_wait( log, 1 );
+                        setup_timed_wait( log, 0 );
                         pthread_cond_timedwait( &lp->cond, &lp->mtx, &lp->wait_target );
                 // }
                 

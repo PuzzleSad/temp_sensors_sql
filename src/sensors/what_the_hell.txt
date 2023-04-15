@@ -1,0 +1,12 @@
+What the hell is this s_vtable business??????
+
+The strange method of coding in the sensors section of the program is an exercise.
+At the time of writing I don't have a clear idea of how polymorphism is implemented for languages 
+such as cpp. 
+The exercise is to force myself to implement a solution with limited knowledge of what is done 
+in a language such as cpp. 
+
+The idea is that there is a compatability layer implemented. 
+Since various temperature sensors will have different ways to talk to them, in order to write a 
+program to talk to these various sensors, each one would need a special section of code to be 
+accessed.
