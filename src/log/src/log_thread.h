@@ -1,13 +1,7 @@
 #ifndef LOG_THREAD_H
 #define LOG_THREAD_H
 
-#define printerr_loc(errmsg)\
-do{\
-        printf("\033[91m"errmsg"\033[0m");\
-        printf("\033[95m""func: %s\n""\033[0m", __FUNCTION__);\
-        printf("\033[95m""file: %s\n""\033[0m", __FILE__);\
-        printf("\033[95m""line: %d\n""\033[0m", __LINE__);\
-}while(0)
+
 
 #include "../log.h"
 

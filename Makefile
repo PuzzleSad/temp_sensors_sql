@@ -34,14 +34,14 @@ $(BIN): $(OBJECTS)
 	@$(CC) $(CFLAGS) -I$(HEADERDIR) -o $@ $^ -lm -lsqlite3 -lpthread
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c
-	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
 $(BUILDDIR)/%.o: src/%.c
-	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
 $(BUILDDIR)/%.o: src/sql/src/%.c
-	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
 $(BUILDDIR)/%.o: src/log/src/%.c
-	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 

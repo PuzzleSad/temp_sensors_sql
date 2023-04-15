@@ -1,6 +1,7 @@
 #include "../log.h"
 #include "log_priv.h"
 #include "log_thread.h"
+#include "log_fileio.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -9,21 +10,14 @@
 
 int log_init( log_t* log ){
         assert( log != NULL );
-        int statusA = 0, statusB = 0;
+        int status = 0;
+        memset( log, 0, sizeof(log_t));
 
         
-        statusB = _log_threadsetup( log );
+        status = _log_threadsetup( log );
 
-
-
-
-        if(statusA != EXIT_SUCCESS ){
-                printerr_loc("\nlog init error\n");
-                return EXIT_FAILURE;
-        }
-
-        if(statusB != EXIT_SUCCESS ){
-                printerr_loc("\nlog thread init error\n");
+        if(status != EXIT_SUCCESS ){
+                printerr_loc("\nlog thread setup error\n");
                 return EXIT_FAILURE;
         }
 
@@ -33,6 +27,15 @@ int log_init( log_t* log ){
 int log_start( log_t* log ){
         assert( log != NULL );
         int status = 0;
+        
+        status = test_file( log, CREATE_IF_NO_FILE );
+
+        if(status != EXIT_SUCCESS ){
+                printerr_loc("\nlogfile error\n");
+                return EXIT_FAILURE;
+        }
+
+
         status = _log_initthread( log );
 
         if(status != EXIT_SUCCESS ){
@@ -77,6 +80,7 @@ int log_logfile( log_t* log, const char* path ){
 
         log->path = (char*)calloc( (str_len + 1), sizeof(char) );
         memcpy( log->path, path, str_len );
+
 
         return EXIT_SUCCESS;
 }

@@ -3,6 +3,8 @@
 #include "src/sql/sql.h"
 #include "src/log/log.h"
 
+#include <unistd.h>
+
 
 int main(){
         printf("\n\n");
@@ -16,6 +18,8 @@ int main(){
 
         database_open( &db, "test.db");
         print_tables(db);
+
+        sleep(6);
 
 
 
