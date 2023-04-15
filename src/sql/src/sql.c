@@ -48,5 +48,8 @@ int database_open(sqlite3 **db,const char* path){
                         return EXIT_SUCCESS;
                 }
         }
+
+
         
+        return EXIT_SUCCESS;
 }

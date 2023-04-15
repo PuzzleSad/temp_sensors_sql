@@ -1,7 +1,7 @@
 CC=ccache gcc
 CFLAGS=-Wall -Wextra -O2 --std=c11
 
-BIN=a
+BIN=a.elf
 
 HEADERDIR=.
 SOURCEDIR=.
@@ -10,7 +10,8 @@ BUILDDIR=build
 
 SOURCES= $(wildcard *.c)\
 	$(wildcard src/*.c)\
-	$(wildcard src/sql/src/*.c)
+	$(wildcard src/sql/src/*.c)\
+	$(wildcard src/log/src/*.c)
 
 OBJECTS= $(patsubst %.c, $(BUILDDIR)/%.o, $(notdir $(SOURCES)) )
 
@@ -30,7 +31,7 @@ run: $(BIN)
 
 $(BIN): $(OBJECTS)
 	@echo "linking..."
-	@$(CC) $(CFLAGS) -I$(HEADERDIR) -o $@ $^ -lm -lsqlite3
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -o $@ $^ -lm -lsqlite3 -lpthread
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c
 	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
@@ -39,5 +40,8 @@ $(BUILDDIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
 $(BUILDDIR)/%.o: src/sql/src/%.c
+	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+
+$(BUILDDIR)/%.o: src/log/src/%.c
 	$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
