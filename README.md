@@ -8,6 +8,7 @@ basic driver, sql and threading implementation.
 
 As of writing this README the project is incomplete
 Features currently in a partially completed state:
+
         Validation of file directories, if the directory doesn't exist or doesn't allow access
         a warning is printed to stderr.
 
@@ -16,6 +17,7 @@ Features currently in a partially completed state:
         time basis.
 
 A majour work in progress feature is a driver system for reading sensors.
+
         Since it cannot be assumed that each temperature sensor has the same method of reading, 
         unique code has to be written to handle the reading.
         The codebase goal is to implement a method to have a handle on N sensors of M different 
