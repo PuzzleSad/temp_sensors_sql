@@ -7,6 +7,8 @@
 
 #include <unistd.h>
 
+#include "temp_sensors_sql.h"
+
 
 int main(){
         printf("\n\n");

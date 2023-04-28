@@ -13,7 +13,8 @@ SOURCES= $(wildcard *.c)\
 	$(wildcard src/sql/src/*.c)\
 	$(wildcard src/log/src/*.c)\
 	$(wildcard src/sensors/src/*.c)\
-	$(wildcard src/reading/src/*.c)
+	$(wildcard src/reading/src/*.c)\
+	$(wildcard src/stringutils/src/*.c)\
 
 OBJECTS= $(patsubst %.c, $(BUILDDIR)/%.o, $(notdir $(SOURCES)) )
 
@@ -51,5 +52,8 @@ $(BUILDDIR)/%.o: src/sensors/src/%.c
 	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
 $(BUILDDIR)/%.o: src/reading/src/%.c
+	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
+
+$(BUILDDIR)/%.o: src/stringutils/src/%.c
 	@$(CC) $(CFLAGS) -I$(HEADERDIR) -c $< -o $@
 
