@@ -24,8 +24,7 @@ int main(){
         sleep(0);
         
         ds18b20_t* d;
-        int ds_count;
-        ds_count = find_ds18b20_sensors(&d);
+        find_ds18b20_sensors(&d);
 
 
 

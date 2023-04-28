@@ -139,12 +139,14 @@ static int write_init_log( log_t* log, const char* init_preamble){
 
 static int write_fini_log( log_t* log ){
         #define MSG_MAX_LEN 1000
+        const char* msg_prefix = "log end:   ";
 
         time_t now;
         time( &now );
         char* date_str = ctime( &now );
         
         int msg_len = 0;
+        msg_len += strlen( msg_prefix );
         msg_len += strlen( date_str );
         msg_len += 5;   //thumbsuck number, account for additional spaces and whatnot
 
@@ -157,7 +159,7 @@ static int write_fini_log( log_t* log ){
         char msg_str[MSG_MAX_LEN];
         memset( msg_str, 0, MSG_MAX_LEN);
 
-        sprintf(msg_str, "log end:   %s", date_str);
+        sprintf(msg_str, "%s%s", msg_prefix, date_str);
         
 
         

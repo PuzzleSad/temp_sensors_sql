@@ -7,8 +7,7 @@
 #include <unistd.h>
 #include <dirent.h>
 
-static int ds18b20_path( const char* buff, const char* prefix, const char* dir, int bufflen);
-static int ds18b20_array( ds18b20_t* d, ds18b20_t insert, int offset );
+static int ds18b20_path( char* buff, const char* prefix, char* dir, int bufflen);
 
 int find_ds18b20_sensors(ds18b20_t** d){
         const char* prefix_path = "/sys/bus/w1/devices";
@@ -16,10 +15,11 @@ int find_ds18b20_sensors(ds18b20_t** d){
         struct dirent *dir_p;
         DIR *dir;
 
-        ds18b20_t* d = NULL;
-        int offset = 0;
+        
 
         d = NULL;
+
+        (void)d;        /* TODO this */
 
         if( (dir = opendir(prefix_path)) == NULL ){
                 fprintf(stderr, "dir: %s\n", prefix_path);
@@ -33,7 +33,7 @@ int find_ds18b20_sensors(ds18b20_t** d){
 
                 if( strstr( dir_p->d_name, "28-") != NULL ){
                         /* Found path to a ds18b20 dir */
-                        #define BUFF_LEN 1000
+                        #define BUFF_LEN 100
                         char buff[BUFF_LEN];
 
                         ds18b20_path( 
@@ -46,12 +46,7 @@ int find_ds18b20_sensors(ds18b20_t** d){
 
                         #undef BUFFLEN
 
-                        
-                        ds18b20_t new_ds;
-                        new_ds.dev_id = 5;
-                        new_ds.path = buff;
-                        /* buff now has a valid path in it, unlesss the path func failed... */
-                        offset = ds18b20_array( d, new_ds, offset );
+                
 
                 }
         }
@@ -68,7 +63,7 @@ int find_ds18b20_sensors(ds18b20_t** d){
 //      prefix: /sys/bus/w1/devices
 //      dir:     28-01801082158       (example name)
 //      output: /sys/bus/w1/devices/28-01801082158/<something>
-static int ds18b20_path( const char* buff, const char* prefix, const char* dir, int bufflen){
+static int ds18b20_path( char* buff, const char* prefix, char* dir, int bufflen){
         memset( buff, 0, bufflen );
 
         int str_len = 0;
@@ -86,11 +81,3 @@ static int ds18b20_path( const char* buff, const char* prefix, const char* dir, 
         return EXIT_SUCCESS;
 }
 
-
-static int ds18b20_array( ds18b20_t* d, ds18b20_t insert, int offset ){
-        d = (ds18b20_t*)realloc( offset + 1, sizeof( ds18b20_t) );
-        memcpy( &d[offset], &insert, sizeof(ds18b20_t) );
-        offset++;
-
-        return offset;
-}

@@ -18,5 +18,8 @@ int init_sensors( sensors_t* sensors ){
 }
 
 int init_sensors_of_type( sensors_t* sensors, uint32_t type ){
+        /* TODO this */
+        (void)type;
+        (void)sensors;
         return 0;
 }
