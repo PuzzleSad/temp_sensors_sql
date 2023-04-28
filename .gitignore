@@ -1,2 +1,4 @@
 *.db
 *.elf
+*.o
+log.txt
